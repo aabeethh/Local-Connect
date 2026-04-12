@@ -1,72 +1,44 @@
-# LocalConnect - Kerala Tourism Platform
+# LocalConnect
 
-Connect tourists with local guides across Kerala.
+Kerala tourism platform that connects tourists with local guides.
 
----
+## Project Structure
 
-## Folder Structure
-
-```
+```text
 LocalConnect/
-├── server.js              ← Express backend (all API routes)
-├── package.json           ← Dependencies
-├── database/
-│   └── db.js              ← SQLite database + seed data
-├── public/
-│   ├── index.html         ← Single page app entry
-│   ├── css/
-│   │   └── main.css
-│   ├── js/
-│   │   ├── api.js
-│   │   ├── auth.js
-│   │   ├── tourist.js
-│   │   ├── guide.js
-│   │   ├── admin.js
-│   │   └── app.js
-│   └── uploads/           ← Profile images (auto-created)
-└── database/
-    └── localconnect.db    ← SQLite file (auto-created)
+|-- server.js
+|-- package.json
+|-- database/
+|   |-- db.js
+|   `-- localconnect.db
+`-- public/
+    |-- index.html
+    |-- css/
+    |   `-- main.css
+    `-- js/
+        |-- api.js
+        |-- app.js
+        |-- auth.js
+        |-- tourist.js
+        |-- guide.js
+        `-- admin.js
 ```
-
----
 
 ## Setup
 
-### 1. Open terminal in this folder
+1. Install dependencies with `npm install`
+2. Start the app with `npm start`
+3. Open `http://localhost:3000`
 
-### 2. Install dependencies
-npm install
+## Default Admin Login
 
-### 3. Start the server
-npm start
+- Email: `admin@localconnect.com`
+- Password: `admin123`
 
-(or: npm run dev  for auto-reload)
+## Main Flow
 
-### 4. Open browser
-http://localhost:3000
-
----
-
-## Default Login
-
-| Role  | Email                  | Password |
-|-------|------------------------|----------|
-| Admin | admin@localconnect.com | admin123 |
-
----
-
-## User Flows
-
-TOURIST
-- Register → Dashboard → Set up Profile
-- Explore Places → Book Guide → Choose Package → Pay after acceptance
-
-GUIDE (enrolled from tourist)
-- Tourist applies via Enrolment tab
-- Admin approves → user logs out/in → Guide Dashboard
-- Set up profile → add packages → accept/reject requests → view revenue
-
-ADMIN
-- Login → analytics dashboard
-- Review guide applications → approve/reject
-- Manage all users and guides
+- Tourists register and log in with a tourist account.
+- A tourist can apply for a guide job from the enrolment page.
+- The application includes a separate guide login email and password.
+- When admin approves the application, a linked guide account is created.
+- The user can keep using the tourist account and also sign in separately as a guide.

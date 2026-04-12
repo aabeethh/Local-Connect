@@ -228,7 +228,7 @@ const Auth = {
         <div class="auth-card">
           <div class="logo-sm">Local<span>Connect</span></div>
           <h2>Welcome back</h2>
-          <p>Sign in to your account</p>
+          <p>Sign in as admin, tourist, or approved guide</p>
           <div id="alert-box"></div>
           <div class="form-group">
             <label>Email</label>
@@ -239,7 +239,8 @@ const Auth = {
             <input type="password" id="password" placeholder="••••••••">
           </div>
           <button class="btn btn-primary w-full" id="login-btn" onclick="Auth.doLogin()">Sign In</button>
-          <div class="auth-link">Don't have an account? <a onclick="Auth.renderRegister()">Register here</a></div>
+          <div class="auth-link">Don't have a tourist account? <a onclick="Auth.renderRegister()">Register here</a></div>
+          <div class="auth-link">Approved guide? Use the guide email and password from your application.</div>
           <div class="auth-link"><a onclick="Auth.renderLanding()">← Back to home</a></div>
         </div>
       </div>`;
@@ -268,7 +269,7 @@ const Auth = {
         <div class="auth-card">
           <div class="logo-sm">Local<span>Connect</span></div>
           <h2>Create account</h2>
-          <p>Join LocalConnect as a tourist</p>
+          <p>Create your tourist account first. You can apply for a guide job after login.</p>
           <div id="alert-box"></div>
           <div class="form-row">
             <div class="form-group">

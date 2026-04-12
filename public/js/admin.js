@@ -78,10 +78,13 @@ const Admin = {
           <div><strong style="color:#374151;display:block">District</strong>${a.district}</div>
           <div><strong style="color:#374151;display:block">Experience</strong>${a.experience}</div>
           <div><strong style="color:#374151;display:block">Languages</strong>${a.languages}</div>
+          <div><strong style="color:#374151;display:block">Tourist Login</strong>${a.tourist_email}</div>
+          <div><strong style="color:#374151;display:block">Guide Login</strong>${a.guide_email || '-'}</div>
           <div><strong style="color:#374151;display:block">Applied</strong>${formatDate(a.applied_at)}</div>
           ${a.reviewed_at ? `<div><strong style="color:#374151;display:block">Reviewed</strong>${formatDate(a.reviewed_at)}</div>` : ''}
         </div>
         ${a.about ? `<div style="background:#f9fafb;padding:0.6rem 1rem;border-radius:8px;font-size:0.82rem;color:#6b7280;margin-bottom:0.75rem">${a.about}</div>` : ''}
+        ${a.status === 'approved' ? `<div class="alert alert-success"><i class="fa-solid fa-circle-check"></i> Guide account created for <strong>${a.approved_guide_email_live || a.guide_email}</strong>.</div>` : ''}
         ${a.status === 'pending' ? `
           <div style="display:flex;gap:0.75rem">
             <button class="btn btn-success btn-sm" onclick="Admin.reviewApp(${a.id},'approved')"><i class="fa-solid fa-check"></i> Approve</button>
@@ -93,7 +96,7 @@ const Admin = {
   async reviewApp(id, status) {
     try {
       await API.put(`/api/admin/applications/${id}`, { status });
-      showAlert(status === 'approved' ? 'Application approved! User is now a guide.' : 'Application rejected.', status === 'approved' ? 'success' : 'info', '#app');
+      showAlert(status === 'approved' ? 'Application approved. A separate guide account has been created and linked to the tourist profile.' : 'Application rejected.', status === 'approved' ? 'success' : 'info', '#app');
       Admin.renderApplications();
     } catch(e) { showAlert(e.message); }
   },
@@ -106,13 +109,14 @@ const Admin = {
         ${guides.length ? `
           <div class="table-wrap">
             <table>
-              <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>District</th><th>Rating</th><th>Tours</th></tr></thead>
+              <thead><tr><th>Name</th><th>Guide Email</th><th>Phone</th><th>District</th><th>Linked Tourist</th><th>Rating</th><th>Tours</th></tr></thead>
               <tbody>
                 ${guides.map(g => `<tr>
                   <td><strong>${g.name}</strong></td>
                   <td>${g.email}</td>
                   <td>${g.phone || '-'}</td>
                   <td><span class="tag tag-blue">${g.district || '-'}</span></td>
+                  <td>${g.linked_tourist_id || '-'}</td>
                   <td><i class="fa-solid fa-star" style="color:#f39c12;font-size:0.8rem"></i> ${g.rating || 4.5}</td>
                   <td>${g.total_tours || 0}</td>
                 </tr>`).join('')}
