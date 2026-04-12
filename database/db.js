@@ -169,26 +169,30 @@ async function initDatabase() {
     );
   }
 
-  const places = [
-    ['Munnar', 'Idukki', 'Famous hill station with tea gardens and misty valleys', 'munnar.jpg', 'Nature', 4.8],
-    ['Alleppey Backwaters', 'Alappuzha', 'Iconic houseboat experience through lush backwaters', 'alleppey.jpg', 'Backwater', 4.9],
-    ['Wayanad Wildlife Sanctuary', 'Wayanad', 'Rich biodiversity with elephants, tigers and lush forests', 'wayanad.jpg', 'Wildlife', 4.7],
-    ['Fort Kochi', 'Ernakulam', 'Historic port city with colonial architecture and Chinese nets', 'kochi.jpg', 'Heritage', 4.6],
-    ['Thekkady', 'Idukki', 'Periyar Tiger Reserve and spice plantations', 'thekkady.jpg', 'Wildlife', 4.7],
-    ['Kovalam Beach', 'Thiruvananthapuram', 'Crescent-shaped beach with lighthouse and Ayurveda resorts', 'kovalam.jpg', 'Beach', 4.5],
-    ['Varkala Cliff', 'Thiruvananthapuram', 'Stunning red cliff beach with natural springs', 'varkala.jpg', 'Beach', 4.6],
-    ['Athirapally Falls', 'Thrissur', 'Majestic waterfall called the Niagara of India', 'athirapally.jpg', 'Nature', 4.8],
-    ['Bekal Fort', 'Kasaragod', 'Largest fort in Kerala standing on a promontory over the sea', 'bekal.jpg', 'Heritage', 4.5],
-    ['Kumarakom', 'Kottayam', 'Bird sanctuary and backwater village on Vembanad Lake', 'kumarakom.jpg', 'Backwater', 4.6],
-    ['Vagamon', 'Idukki', 'Serene meadows and pine forests in the Western Ghats', 'vagamon.jpg', 'Nature', 4.7],
-    ['Thrissur Pooram', 'Thrissur', 'Iconic temple festival known as the festival of festivals', 'thrissur.jpg', 'Culture', 4.9]
-  ];
+  const [existingPlaces] = await pool.execute(`SELECT COUNT(*) as count FROM places`);
+  
+  if (existingPlaces[0].count === 0) {
+    const places = [
+      ['Munnar', 'Idukki', 'Famous hill station with tea gardens and misty valleys', 'munnar.jpg', 'Nature', 4.8],
+      ['Alleppey Backwaters', 'Alappuzha', 'Iconic houseboat experience through lush backwaters', 'alleppey.jpg', 'Backwater', 4.9],
+      ['Wayanad Wildlife Sanctuary', 'Wayanad', 'Rich biodiversity with elephants, tigers and lush forests', 'wayanad.jpg', 'Wildlife', 4.7],
+      ['Fort Kochi', 'Ernakulam', 'Historic port city with colonial architecture and Chinese nets', 'kochi.jpg', 'Heritage', 4.6],
+      ['Thekkady', 'Idukki', 'Periyar Tiger Reserve and spice plantations', 'thekkady.jpg', 'Wildlife', 4.7],
+      ['Kovalam Beach', 'Thiruvananthapuram', 'Crescent-shaped beach with lighthouse and Ayurveda resorts', 'kovalam.jpg', 'Beach', 4.5],
+      ['Varkala Cliff', 'Thiruvananthapuram', 'Stunning red cliff beach with natural springs', 'varkala.jpg', 'Beach', 4.6],
+      ['Athirapally Falls', 'Thrissur', 'Majestic waterfall called the Niagara of India', 'athirapally.jpg', 'Nature', 4.8],
+      ['Bekal Fort', 'Kasaragod', 'Largest fort in Kerala standing on a promontory over the sea', 'bekal.jpg', 'Heritage', 4.5],
+      ['Kumarakom', 'Kottayam', 'Bird sanctuary and backwater village on Vembanad Lake', 'kumarakom.jpg', 'Backwater', 4.6],
+      ['Vagamon', 'Idukki', 'Serene meadows and pine forests in the Western Ghats', 'vagamon.jpg', 'Nature', 4.7],
+      ['Thrissur Pooram', 'Thrissur', 'Iconic temple festival known as the festival of festivals', 'thrissur.jpg', 'Culture', 4.9]
+    ];
 
-  for (const place of places) {
-    await pool.execute(
-      `INSERT IGNORE INTO places (name, district, description, image, category, rating) VALUES (?, ?, ?, ?, ?, ?)`,
-      place
-    );
+    for (const place of places) {
+      await pool.execute(
+        `INSERT INTO places (name, district, description, image, category, rating) VALUES (?, ?, ?, ?, ?, ?)`,
+        place
+      );
+    }
   }
 }
 

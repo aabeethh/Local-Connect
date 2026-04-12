@@ -66,7 +66,7 @@ const Tourist = {
       </div>
 
       <div class="enroll-banner">
-        <div><h3>Become a Local Guide</h3><p>Apply from your tourist account and get a separate guide login after admin approval</p></div>
+        <div><h3>Become a Local Guide</h3><p>Share your knowledge of Kerala and earn money guiding tourists</p></div>
         <button class="btn btn-outline" onclick="Tourist.renderEnrollForm()">Apply as Guide</button>
       </div>
 
@@ -98,41 +98,42 @@ const Tourist = {
     const places = await API.get(`/api/places${district ? '?district=' + district : ''}`).catch(() => []);
     const filtered = search ? places.filter(p => p.name.toLowerCase().includes(search.toLowerCase()) || p.district.toLowerCase().includes(search.toLowerCase())) : places;
 
-    // Unsplash image map keyed by place name (falls back to category image)
+    // Real Unsplash images for Kerala places
     const placeImages = {
-      'Munnar':                   'https://images.unsplash.com/photo-1605276374584-bee46080205b?w=800&q=80',
-      'Alleppey Backwaters':      'https://images.unsplash.com/photo-1605325984359-a41a0001d88a?w=800&q=80',
-      'Wayanad Wildlife Sanctuary':'https://images.unsplash.com/photo-1489493072403-841bd36e76ea?w=800&q=80',
-      'Fort Kochi':               'https://images.unsplash.com/photo-1605249217295-60d74f90801d?w=800&q=80',
-      'Thekkady':                 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
-      'Kovalam Beach':            'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
-      'Varkala Cliff':            'https://images.unsplash.com/photo-1507838639206-4edd02385f4f?w=800&q=80',
-      'Athirapally Falls':        'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
-      'Bekal Fort':               'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
-      'Kumarakom':                'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
-      'Vagamon':                  'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
-      'Thrissur Pooram':          'https://images.unsplash.com/photo-1586349943529-3c1021fbb225?w=800&q=80',
-    };
-    const categoryImages = {
-      Nature:    'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=75',
-      Beach:     'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=600&q=75',
-      Wildlife:  'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600&q=75',
-      Heritage:  'https://images.unsplash.com/photo-1568454537842-d933259bb258?w=600&q=75',
-      Backwater: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600&q=75',
-      Culture:   'https://images.unsplash.com/photo-1575540842954-99ef7dc76a5c?w=600&q=75',
+      'Munnar': 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600&q=80',
+      'Alleppey Backwaters': 'https://www.tripadvisor.com/Attraction_Review-g608471-d2389583-Reviews-Alleppey_Backwaters-Alappuzha_Alappuzha_District_Kerala.html',
+      'Wayanad Wildlife Sanctuary': 'https://images.unsplash.com/photo-1591017403286-fd8493524e1e?w=600&q=80',
+      'Fort Kochi': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
+      'Thekkady': 'https://images.unsplash.com/photo-1549366021-9f761d450615?w=600&q=80',
+      'Kovalam Beach': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80',
+      'Varkala Cliff': 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=600&q=80',
+      'Athirapally Falls': 'https://images.unsplash.com/photo-1536244636800-a3f74db0f3cf?w=600&q=80',
+      'Bekal Fort': 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600&q=80',
+      'Kumarakom': 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600&q=80',
+      'Vagamon': 'https://images.unsplash.com/photo-1553697388-94e804e2f0f6?w=600&q=80',
+      'Thrissur Pooram': 'https://images.unsplash.com/photo-1631189351716-0b9e4b0a977c?w=600&q=80',
     };
 
-    document.getElementById('places-grid').innerHTML = filtered.length ? filtered.map(p => {
-      const imgSrc = placeImages[p.name] || categoryImages[p.category] || 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600&q=75';
+    const categoryColors = {
+      Nature: 'linear-gradient(135deg,#1a7a6e,#2d6a8f)',
+      Beach: 'linear-gradient(135deg,#2d6a8f,#c9a84c)',
+      Wildlife: 'linear-gradient(135deg,#6b8f71,#1c2333)',
+      Heritage: 'linear-gradient(135deg,#92400e,#1c2333)',
+      Backwater: 'linear-gradient(135deg,#1a7a6e,#1c2333)',
+      Culture: 'linear-gradient(135deg,#7c3aed,#1c2333)'
+    };
+
+    document.getElementById('places-grid').innerHTML = filtered.length ? filtered.map((p, i) => {
+      const imgUrl = placeImages[p.name];
       return `
-      <div class="place-card">
-        <div class="place-img">
-          <img src="${imgSrc}" alt="${p.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;">
+      <div class="place-card anim-fade-up" style="animation-delay:${(i % 6) * 0.07}s">
+        <div class="place-img" style="background:${categoryColors[p.category] || 'linear-gradient(135deg,#1c2333,#2d6a8f)'}">
+          ${imgUrl ? `<img src="${imgUrl}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'">` : ''}
           <div class="place-badge">${p.category}</div>
         </div>
         <div class="place-body">
           <div class="place-name">${p.name}</div>
-          <div class="place-district"><i class="fa-solid fa-location-dot"></i>${p.district}</div>
+          <div class="place-district"><i class="fa-solid fa-location-dot" style="color:var(--gold)"></i> ${p.district}</div>
           <div class="place-desc">${p.description}</div>
           <div class="rating"><i class="fa-solid fa-star"></i> ${p.rating} <span>(Highly rated)</span></div>
           <button class="btn btn-primary w-full btn-sm" onclick="Tourist.showGuides('${p.district}','${p.name}')">
@@ -396,9 +397,8 @@ const Tourist = {
             <div><strong style="color:#374151;display:block">Applied</strong>${formatDate(app.applied_at)}</div>
             ${app.reviewed_at ? `<div><strong style="color:#374151;display:block">Reviewed</strong>${formatDate(app.reviewed_at)}</div>` : ''}
           </div>
-          ${app.guide_email ? `<div class="alert alert-info mt-2"><i class="fa-solid fa-user-lock"></i> Guide login email: <strong>${app.guide_email}</strong></div>` : ''}
-          ${app.status === 'pending' ? `<div class="alert alert-warning mt-2"><i class="fa-solid fa-clock"></i> Your application is under review by admin. Your guide login will become active after approval.</div>` : ''}
-          ${app.status === 'approved' ? `<div class="alert alert-success mt-2"><i class="fa-solid fa-circle-check"></i> Congratulations! Your guide account is approved. Sign in with your guide login email and the guide password you submitted in this application.</div>` : ''}
+          ${app.status === 'pending' ? `<div class="alert alert-warning mt-2"><i class="fa-solid fa-clock"></i> Your application is under review by admin.</div>` : ''}
+          ${app.status === 'approved' ? `<div class="alert alert-success mt-2"><i class="fa-solid fa-circle-check"></i> Congratulations! Your application was approved. Please log out and log back in to access your guide dashboard.</div>` : ''}
           ${app.status === 'rejected' ? `<div class="alert alert-error mt-2"><i class="fa-solid fa-xmark-circle"></i> Your application was not approved this time.</div>` : ''}
         </div>`;
     } else {
@@ -413,7 +413,7 @@ const Tourist = {
       <div class="topbar"><div class="page-title">Apply as Guide</div></div>
       <div class="card" style="max-width:600px">
         <div id="alert-box"></div>
-        <p class="text-muted mb-2">Fill this application to join as a local guide. Your tourist account stays the same. After admin approval, your guide login becomes active.</p>
+        <p class="text-muted mb-2">Fill this application to join as a local guide. Admin will review your application.</p>
         <div class="form-row">
           <div class="form-group"><label>Full Name</label><input id="ga-name" value="${user.name || ''}"></div>
           <div class="form-group"><label>Email</label><input id="ga-email" value="${user.email || ''}"></div>
@@ -430,10 +430,6 @@ const Tourist = {
           <div class="form-group"><label>Years of Experience</label><input id="ga-exp" placeholder="e.g. 3 years"></div>
           <div class="form-group"><label>Languages Known</label><input id="ga-lang" placeholder="Malayalam, English, Hindi"></div>
         </div>
-        <div class="form-row">
-          <div class="form-group"><label>Guide Login Email</label><input id="ga-guide-email" type="email" placeholder="guide@example.com"></div>
-          <div class="form-group"><label>Guide Login Password</label><input id="ga-guide-password" type="password" placeholder="Min 6 characters"></div>
-        </div>
         <div class="form-group"><label>About Yourself</label><textarea id="ga-about" placeholder="Tell us about your knowledge of the area, what makes you a great guide..."></textarea></div>
         <button class="btn btn-primary" id="enroll-btn" onclick="Tourist.submitEnroll()">Submit Application</button>
       </div>`);
@@ -447,17 +443,14 @@ const Tourist = {
       district: document.getElementById('ga-district')?.value,
       experience: document.getElementById('ga-exp')?.value,
       languages: document.getElementById('ga-lang')?.value,
-      about: document.getElementById('ga-about')?.value,
-      guide_email: document.getElementById('ga-guide-email')?.value,
-      guide_password: document.getElementById('ga-guide-password')?.value
+      about: document.getElementById('ga-about')?.value
     };
-    if (!data.full_name || !data.phone || !data.district || !data.guide_email || !data.guide_password) return showAlert('Please fill all required fields');
-    if (data.guide_password.length < 6) return showAlert('Guide password must be at least 6 characters');
+    if (!data.full_name || !data.phone || !data.district) return showAlert('Please fill all required fields');
     const btn = document.getElementById('enroll-btn');
     btn.innerHTML = '<span class="spinner"></span>'; btn.disabled = true;
     try {
       await API.post('/api/guide-application', data);
-      showAlert('Application submitted! After approval, use the guide login email and password from this form to sign in as a guide.', 'success');
+      showAlert('Application submitted! Admin will review it soon.', 'success');
       setTimeout(() => Tourist.renderEnrollStatus(), 1500);
     } catch(e) {
       showAlert(e.message);
