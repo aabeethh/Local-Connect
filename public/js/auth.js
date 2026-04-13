@@ -28,10 +28,7 @@ const Auth = {
               </button>
             </div>
           </div>
-          <div class="landing-scroll-hint">
-            <span>Scroll to discover</span>
-            <div class="scroll-line"></div>
-          </div>
+         
         </section>
 
         <!-- Features -->
@@ -76,51 +73,7 @@ const Auth = {
           </div>
         </section>
 
-        <!-- Showcase Places -->
-        <section class="landing-showcase">
-          <div class="showcase-header">
-            <div class="section-eyebrow">Iconic Destinations</div>
-            <h2 class="showcase-title">Kerala's <em>Timeless</em> Wonders</h2>
-            <p style="color:#6b7280;font-size:0.9rem;margin-top:1rem;line-height:1.7">From mist-draped mountain ranges to sun-kissed shores, Kerala holds infinite beauty waiting to be discovered.</p>
-          </div>
-          <div class="showcase-grid" style="max-width:1100px;margin:0 auto">
-            <div class="showcase-card anim-scale d1">
-              <img class="showcase-card-img" src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80" alt="Alleppey Backwaters" loading="lazy">
-              <div class="showcase-card-overlay">
-                <div class="showcase-card-name">Alleppey Backwaters</div>
-                <div class="showcase-card-district">Alappuzha · Backwater</div>
-              </div>
-            </div>
-            <div class="showcase-card anim-scale d2">
-              <img class="showcase-card-img" src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=800&q=80" alt="Munnar" loading="lazy">
-              <div class="showcase-card-overlay">
-                <div class="showcase-card-name">Munnar Tea Gardens</div>
-                <div class="showcase-card-district">Idukki · Nature</div>
-              </div>
-            </div>
-            <div class="showcase-card anim-scale d3">
-              <img class="showcase-card-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Fort Kochi" loading="lazy">
-              <div class="showcase-card-overlay">
-                <div class="showcase-card-name">Fort Kochi</div>
-                <div class="showcase-card-district">Ernakulam · Heritage</div>
-              </div>
-            </div>
-            <div class="showcase-card anim-scale d2">
-              <img class="showcase-card-img" src="https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=800&q=80" alt="Varkala" loading="lazy">
-              <div class="showcase-card-overlay">
-                <div class="showcase-card-name">Varkala Cliffs</div>
-                <div class="showcase-card-district">Thiruvananthapuram · Beach</div>
-              </div>
-            </div>
-            <div class="showcase-card anim-scale d3">
-              <img class="showcase-card-img" src="https://images.unsplash.com/photo-1591017403286-fd8493524e1e?w=800&q=80" alt="Wayanad" loading="lazy">
-              <div class="showcase-card-overlay">
-                <div class="showcase-card-name">Wayanad Forests</div>
-                <div class="showcase-card-district">Wayanad · Wildlife</div>
-              </div>
-            </div>
-          </div>
-        </section>
+  
 
         <!-- Stats Band -->
         <section style="background:linear-gradient(135deg, var(--gold) 0%, var(--coral) 100%);padding:4rem;text-align:center">

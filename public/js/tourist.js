@@ -100,18 +100,18 @@ const Tourist = {
 
     // Real Unsplash images for Kerala places
     const placeImages = {
-      'Munnar': 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600&q=80',
-      'Alleppey Backwaters': 'https://www.tripadvisor.com/Attraction_Review-g608471-d2389583-Reviews-Alleppey_Backwaters-Alappuzha_Alappuzha_District_Kerala.html',
-      'Wayanad Wildlife Sanctuary': 'https://images.unsplash.com/photo-1591017403286-fd8493524e1e?w=600&q=80',
-      'Fort Kochi': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
-      'Thekkady': 'https://images.unsplash.com/photo-1549366021-9f761d450615?w=600&q=80',
-      'Kovalam Beach': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80',
-      'Varkala Cliff': 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=600&q=80',
-      'Athirapally Falls': 'https://images.unsplash.com/photo-1536244636800-a3f74db0f3cf?w=600&q=80',
-      'Bekal Fort': 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600&q=80',
-      'Kumarakom': 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600&q=80',
-      'Vagamon': 'https://images.unsplash.com/photo-1553697388-94e804e2f0f6?w=600&q=80',
-      'Thrissur Pooram': 'https://images.unsplash.com/photo-1631189351716-0b9e4b0a977c?w=600&q=80',
+      'Munnar': 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/db/d3/f9/munnar-largejpg.jpg?w=1200&h=-1&s=1',
+      'Alleppey Backwaters': 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600&q=80',
+      'Wayanad Wildlife Sanctuary': 'https://www.wayanad.com/files/slides/2064569462.webp',
+      'Fort Kochi': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGu2fjQLolb8FZGhN0KZjp2W7brPc_cQo4ww&s',
+      'Thekkady': 'https://www.soil2soulexpeditions.com/admin/public/images/cities/image_file/48334/Thekkady.jpg',
+      'Kovalam Beach': 'https://s7ap1.scene7.com/is/image/incredibleindia/kovalam-beach-thiruvananthapuram-kerala-2-attr-hero?qlt=82&ts=1742152368699',
+      'Varkala Cliff': 'https://www.trawell.in/admin/images/upload/377739609Varkala_cliff.jpg',
+      'Athirapally Falls': 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/4b/a2/1c/athirapally-falls-in.jpg?w=1200&h=-1&s=1',
+      'Bekal Fort': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa2g10kJxZhjLdPgl8tl3H8LwM9MxmAEaxbQ&s',
+      'Kumarakom': 'https://s7ap1.scene7.com/is/image/incredibleindia/kumarakom-backwaters-kumarakom-kerala?qlt=82&ts=1727367741456',
+      'Vagamon': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8TTs1KuRLGF0Aa4vUAs2c6CVlZg1X2biepA&s',
+      'Thrissur':'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOuBsrQo4fbOtmBnVO8-B2ksrEO-Rc6JgILA&s',
     };
 
     const categoryColors = {
@@ -124,7 +124,7 @@ const Tourist = {
     };
 
     document.getElementById('places-grid').innerHTML = filtered.length ? filtered.map((p, i) => {
-      const imgUrl = placeImages[p.name];
+      const imgUrl = placeImages[p.name] || placeImages[p.district];
       return `
       <div class="place-card anim-fade-up" style="animation-delay:${(i % 6) * 0.07}s">
         <div class="place-img" style="background:${categoryColors[p.category] || 'linear-gradient(135deg,#1c2333,#2d6a8f)'}">
