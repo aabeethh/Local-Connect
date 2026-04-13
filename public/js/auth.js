@@ -132,10 +132,7 @@ const Auth = {
                 Sign In
               </button>
             </div>
-            <div class="admin-hint">
-              <i class="fa-solid fa-lock" style="margin-right:0.5rem;opacity:0.5"></i>
-              Admin: admin@localconnect.com / admin123
-            </div>
+           
           </div>
         </section>
 
