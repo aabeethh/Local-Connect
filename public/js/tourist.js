@@ -430,6 +430,10 @@ const Tourist = {
           <div class="form-group"><label>Years of Experience</label><input id="ga-exp" placeholder="e.g. 3 years"></div>
           <div class="form-group"><label>Languages Known</label><input id="ga-lang" placeholder="Malayalam, English, Hindi"></div>
         </div>
+        <div class="form-row">
+          <div class="form-group"><label>Guide Login Email</label><input id="ga-guide-email" placeholder="email for guide account"></div>
+          <div class="form-group"><label>Guide Password</label><input id="ga-guide-password" type="password" placeholder="password for guide account (min 6 chars)"></div>
+        </div>
         <div class="form-group"><label>About Yourself</label><textarea id="ga-about" placeholder="Tell us about your knowledge of the area, what makes you a great guide..."></textarea></div>
         <button class="btn btn-primary" id="enroll-btn" onclick="Tourist.submitEnroll()">Submit Application</button>
       </div>`);
@@ -443,9 +447,12 @@ const Tourist = {
       district: document.getElementById('ga-district')?.value,
       experience: document.getElementById('ga-exp')?.value,
       languages: document.getElementById('ga-lang')?.value,
-      about: document.getElementById('ga-about')?.value
+      about: document.getElementById('ga-about')?.value,
+      guide_email: document.getElementById('ga-guide-email')?.value,
+      guide_password: document.getElementById('ga-guide-password')?.value
     };
-    if (!data.full_name || !data.phone || !data.district) return showAlert('Please fill all required fields');
+    if (!data.full_name || !data.phone || !data.district || !data.guide_email || !data.guide_password) return showAlert('Please fill all required fields');
+    if (data.guide_password.length < 6) return showAlert('Guide password must be at least 6 characters');
     const btn = document.getElementById('enroll-btn');
     btn.innerHTML = '<span class="spinner"></span>'; btn.disabled = true;
     try {
